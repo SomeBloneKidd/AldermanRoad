@@ -22,17 +22,18 @@
             background-size: cover;
         }
 
-        /* Mobile: keep bottom of image visible */
+        /* MOBILE: lock to bottom so footer of image is always visible */
         @media (max-width: 767px) {
             body {
                 background-position: center bottom;
-                background-size: cover;
+                background-size: 120vh; /* key fix: forces height-based scaling */
             }
         }
 
-        /* Desktop: normal fixed full cover look */
+        /* DESKTOP */
         @media (min-width: 768px) {
             body {
+                background-size: cover;
                 background-attachment: fixed;
             }
         }
@@ -190,7 +191,6 @@
 
 <body>
 
-<!-- HERO -->
 <div class="overlay">
 
     <h1>Alderman Road</h1>
@@ -215,7 +215,6 @@
 
 </div>
 
-<!-- MEMBERS -->
 <section class="members-section">
 
     <div class="members-title">Meet The Band</div>
@@ -254,7 +253,6 @@
 
 </section>
 
-<!-- ABOUT -->
 <section class="about-section">
 
     <div class="about-title">About Us</div>
