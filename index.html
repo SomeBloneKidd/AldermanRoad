@@ -18,20 +18,21 @@
         body {
             background-image: url("ARBackground.png");
             background-repeat: no-repeat;
-            background-position: center;
-            background-size: 130%;
+            background-position: center bottom;
+            background-size: cover;
         }
 
+        /* Mobile: keep bottom of image visible */
         @media (max-width: 767px) {
             body {
-                background-size: 160%;
-                background-position: center top;
+                background-position: center bottom;
+                background-size: cover;
             }
         }
 
+        /* Desktop: normal fixed full cover look */
         @media (min-width: 768px) {
             body {
-                background-size: cover;
                 background-attachment: fixed;
             }
         }
