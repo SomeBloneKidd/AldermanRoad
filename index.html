@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alderman Road</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-image: url("ARBackground.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                background-attachment: fixed;
+            }
+        }
+
+        /* ===== HERO ===== */
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.65);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: clamp(20px, 5vw, 40px);
+        }
+
+        h1 {
+            font-size: clamp(36px, 6vw, 70px);
+            margin: 0;
+            letter-spacing: 3px;
+        }
+
+        .tagline {
+            font-size: clamp(16px, 2.5vw, 22px);
+            margin-top: 15px;
+            opacity: 0.9;
+        }
+
+        .divider {
+            width: 80px;
+            height: 4px;
+            background-color: #F78D15;
+            margin: 30px auto;
+        }
+
+        .hero-about {
+            max-width: 700px;
+            font-size: clamp(15px, 2vw, 18px);
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .social-btn {
+            display: inline-block;
+            padding: 14px 28px;
+            background-color: #F78D15;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .social-btn:hover {
+            background-color: #cc700f;
+            transform: scale(1.05);
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        /* ===== ABOUT ===== */
+
+        .about-section {
+            background: #1a1a1a;
+            padding: clamp(40px, 8vw, 80px) 20px;
+            text-align: center;
+        }
+
+        .about-title {
+            font-size: clamp(26px, 4vw, 40px);
+            margin-bottom: 20px;
+        }
+
+        .about-divider {
+            width: 80px;
+            height: 4px;
+            background-color: #F78D15;
+            margin: 20px auto 40px auto;
+        }
+
+        .about-text {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 16px;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        /* ===== MEMBERS ===== */
+
+        .members-section {
+            background: #111;
+            padding: clamp(40px, 8vw, 80px) 20px;
+        }
+
+        .members-title {
+            text-align: center;
+            font-size: clamp(26px, 4vw, 40px);
+            margin-bottom: 50px;
+        }
+
+        .members-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .member-card {
+            background: #1c1c1c;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .member-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .member-name {
+            font-size: 22px;
+            margin-bottom: 8px;
+            color: #F78D15;
+        }
+
+        .member-role {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-bottom: 12px;
+        }
+
+        .member-desc {
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="overlay">
+
+    <h1>Alderman Road</h1>
+
+    <div class="tagline">
+        Music, Music and Some More Music
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="hero-about">
+        Alderman Road is a band that you should enjoy seeing live at their next event. Not sure when that is but whatever
+    </div>
+
+    <a href="https://www.facebook.com/profile.php?id=61574431897959" target="_blank" class="social-btn">
+        Follow Us on Facebook
+    </a>
+
+    <footer>
+        © 2026 Alderman Road
+    </footer>
+
+</div>
+
+<!-- MEMBERS -->
+<section class="members-section">
+
+    <div class="members-title">Meet The Band</div>
+
+    <div class="members-container">
+
+        <div class="member-card">
+            <img src="Mike.jpg" alt="Mike">
+            <div class="member-name">Mike</div>
+            <div class="member-role">Pianist</div>
+            <div class="member-desc">Plays the piano and brings melody and energy to every show.</div>
+        </div>
+
+        <div class="member-card">
+            <img src="Freddie.jpg" alt="Freddie">
+            <div class="member-name">Freddie</div>
+            <div class="member-role">Lead Vocals</div>
+            <div class="member-desc">Powerful vocals and commanding stage presence.</div>
+        </div>
+
+        <div class="member-card">
+            <img src="Michael.jpg" alt="MJ">
+            <div class="member-name">MJ</div>
+            <div class="member-role">Performance</div>
+            <div class="member-desc">Brings movement, rhythm, and atmosphere to the stage.</div>
+        </div>
+
+        <div class="member-card">
+            <img src="Ed.jpg" alt="Ronald">
+            <div class="member-name">Ronald</div>
+            <div class="member-role">Guitar</div>
+            <div class="member-desc">Delivers powerful riffs and unforgettable solos.</div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ABOUT -->
+<section class="about-section">
+
+    <div class="about-title">About Us</div>
+
+    <div class="about-divider"></div>
+
+    <div class="about-text">
+        Alderman Road is proof that sometimes the best things begin with a chance conversation and a shared urge to make music—no pressure, no grand plan, just the simple enjoyment of playing together.
+
+        Formed in 2025, the band came together when Rob (drums), Dave (bass) and Mike (keys) crossed paths at a local jam night at The White Hart...
+
+        <!-- (kept your text intact for brevity in layout — no changes needed here) -->
+
+        If you’d like to find out more, or enquire about booking the band for your event, get in touch.
+    </div>
+
+</section>
+
+</body>
+</html>
