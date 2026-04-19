@@ -11,9 +11,10 @@
             font-family: Arial, sans-serif;
             color: white;
             scroll-behavior: smooth;
+            height: 100%;
         }
 
-        /* ===== BACKGROUND ===== */
+        /* ===== BACKGROUND (SAFE VERSION) ===== */
 
         body {
             background-image: url("ARBackground.png");
@@ -22,18 +23,17 @@
             background-size: cover;
         }
 
-        /* MOBILE: lock to bottom so footer of image is always visible */
+        /* MOBILE: ensure bottom stays visible WITHOUT breaking image */
         @media (max-width: 767px) {
             body {
                 background-position: center bottom;
-                background-size: 120vh; /* key fix: forces height-based scaling */
+                background-size: cover;
             }
         }
 
-        /* DESKTOP */
+        /* Desktop parallax feel */
         @media (min-width: 768px) {
             body {
-                background-size: cover;
                 background-attachment: fixed;
             }
         }
@@ -205,7 +205,7 @@
         Alderman Road is a band that you should enjoy seeing live at their next event. Not sure when that is but whatever
     </div>
 
-    <a href="https://www.facebook.com/profile.php?id=61574431897959" target="_blank" class="social-btn">
+    <a href="https://www.facebook.com/profile.php?id=61574431897959" class="social-btn" target="_blank">
         Follow Us on Facebook
     </a>
 
@@ -215,6 +215,7 @@
 
 </div>
 
+<!-- MEMBERS -->
 <section class="members-section">
 
     <div class="members-title">Meet The Band</div>
@@ -253,6 +254,7 @@
 
 </section>
 
+<!-- ABOUT -->
 <section class="about-section">
 
     <div class="about-title">About Us</div>
