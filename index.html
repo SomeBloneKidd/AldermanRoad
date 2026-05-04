@@ -72,6 +72,52 @@ body::before {
 
 .nav-links a:hover { color: var(--accent); }
 
+/* MOBILE NAV */
+
+.nav-toggle {
+    display: none;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* Tablet & Down */
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 15px 20px;
+        align-items: center;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: rgba(0,0,0,0.95);
+        backdrop-filter: blur(15px);
+        width: 220px;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+
+        transform: translateX(100%);
+        transition: 0.3s ease;
+        border-radius: 0 0 0 20px;
+    }
+
+    .nav-links a {
+        margin: 0;
+    }
+
+    .nav-links.active {
+        transform: translateX(0);
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+}
+
 /* HERO */
 
 .hero {
@@ -330,7 +376,12 @@ footer {
 
 <div class="navbar">
     <div class="nav-logo">Alderman Road</div>
-    <div class="nav-links">
+
+    <div class="nav-toggle" id="navToggle">
+        ☰
+    </div>
+
+    <div class="nav-links" id="navLinks">
         <a href="#video">Live</a>
         <a href="#shows">Shows</a>
         <a href="#members">Band</a>
@@ -452,6 +503,19 @@ shows.forEach(show => {
     container.appendChild(div);
 });
 
+/* MOBILE NAV TOGGLE */
+
+const navToggle = document.getElementById("navToggle");
+const navLinks = document.getElementById("navLinks");
+
+navToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+    });
+});
+});
 </script>
 
 </body>
