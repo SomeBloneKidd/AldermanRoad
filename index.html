@@ -178,6 +178,12 @@ body::before {
     height: auto;
     animation: logoGlow 2.5s ease-in-out infinite alternate;
 }
+/* Slightly larger logo on phones + tablets */
+@media (hover: none) and (pointer: coarse) {
+    .hero h1 img {
+        width: clamp(220px, 55vw, 500px);
+    }
+}
 
 @media (min-width: 1200px) {
     .hero h1 img {
