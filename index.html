@@ -1,285 +1,458 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alderman Road</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alderman Road</title>
 
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            color: white;
-            scroll-behavior: smooth;
-            height: 100%;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
-        /* ===== BACKGROUND (SAFE VERSION) ===== */
+<style>
 
-        body {
-            background-image: url("ARBackground.png");
-            background-repeat: no-repeat;
-            background-position: center bottom;
-            background-size: cover;
-        }
+:root {
+    --accent: #F78D15;
+    --dark: #0f0f0f;
+}
 
-        /* MOBILE: ensure bottom stays visible WITHOUT breaking image */
-        @media (max-width: 767px) {
-            body {
-                background-position: center bottom;
-                background-size: cover;
-            }
-        }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Desktop parallax feel */
-        @media (min-width: 768px) {
-            body {
-                background-attachment: fixed;
-            }
-        }
+html { scroll-behavior: smooth; }
 
-        /* ===== HERO ===== */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--dark);
+    color: white;
+    overflow-x: hidden;
+}
 
-        .overlay {
-            background: rgba(0, 0, 0, 0.65);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: clamp(20px, 5vw, 40px);
-        }
+/* Animated Background Glow */
 
-        h1 {
-            font-size: clamp(36px, 6vw, 70px);
-            margin: 0;
-            letter-spacing: 3px;
-        }
+body::before {
+    content: "";
+    position: fixed;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(247,141,21,0.15), transparent 70%);
+    top: -200px;
+    left: -200px;
+    animation: floatGlow 10s ease-in-out infinite alternate;
+    z-index: -1;
+}
 
-        .tagline {
-            font-size: clamp(16px, 2.5vw, 22px);
-            margin-top: 15px;
-            opacity: 0.9;
-        }
+@keyframes floatGlow {
+    from { transform: translate(0,0); }
+    to { transform: translate(200px,200px); }
+}
 
-        .divider {
-            width: 80px;
-            height: 4px;
-            background-color: #F78D15;
-            margin: 30px auto;
-        }
+/* NAVBAR */
 
-        .hero-about {
-            max-width: 700px;
-            font-size: clamp(15px, 2vw, 18px);
-            line-height: 1.6;
-            margin-bottom: 40px;
-        }
+.navbar {
+    position: fixed;
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    backdrop-filter: blur(15px);
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
 
-        .social-btn {
-            display: inline-block;
-            padding: 14px 28px;
-            background-color: #F78D15;
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
+.nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+}
 
-        .social-btn:hover {
-            background-color: #cc700f;
-            transform: scale(1.05);
-        }
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 30px;
+    transition: 0.3s;
+}
 
-        footer {
-            margin-top: 50px;
-            font-size: 14px;
-            opacity: 0.7;
-        }
+.nav-links a:hover { color: var(--accent); }
 
-        /* ===== ABOUT ===== */
+/* HERO */
 
-        .about-section {
-            background: #1a1a1a;
-            padding: clamp(40px, 8vw, 80px) 20px;
-            text-align: center;
-        }
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)),
+                url("ARBackground.png") center/cover fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
-        .about-title {
-            font-size: clamp(26px, 4vw, 40px);
-            margin-bottom: 20px;
-        }
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px,6vw,80px);
+    letter-spacing: 4px;
+}
 
-        .about-divider {
-            width: 80px;
-            height: 4px;
-            background-color: #F78D15;
-            margin: 20px auto 40px auto;
-        }
+/* WHITE LOGO GLOW ANIMATION */
 
-        .about-text {
-            max-width: 900px;
-            margin: 0 auto;
-            font-size: 16px;
-            line-height: 1.7;
-            opacity: 0.9;
-            text-align: left;
-        }
+.hero h1 img {
+    width: clamp(220px, 40vw, 600px);
+    height: auto;
+    animation: logoGlow 2.5s ease-in-out infinite alternate;
+}
 
-        /* ===== MEMBERS ===== */
+@keyframes logoGlow {
+    from {
+        filter:
+            /* White outline */
+            drop-shadow(2px 0 0 white)
+            drop-shadow(-2px 0 0 white)
+            drop-shadow(0 2px 0 white)
+            drop-shadow(0 -2px 0 white)
 
-        .members-section {
-            background: #111;
-            padding: clamp(40px, 8vw, 80px) 20px;
-        }
+            /* Glow */
+            drop-shadow(0 0 10px rgba(255,255,255,0.6))
+            drop-shadow(0 0 20px rgba(255,255,255,0.4));
+    }
+    to {
+        filter:
+            /* White outline */
+            drop-shadow(2px 0 0 white)
+            drop-shadow(-2px 0 0 white)
+            drop-shadow(0 2px 0 white)
+            drop-shadow(0 -2px 0 white)
 
-        .members-title {
-            text-align: center;
-            font-size: clamp(26px, 4vw, 40px);
-            margin-bottom: 50px;
-        }
+            /* Stronger glow */
+            drop-shadow(0 0 25px rgba(255,255,255,0.9))
+            drop-shadow(0 0 50px rgba(255,255,255,0.7));
+    }
+}
 
-        .members-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+.tagline { margin-top: 20px; font-size: 20px; opacity: 0.9; }
 
-        .member-card {
-            background: #1c1c1c;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
+.accent-line {
+    width: 100px;
+    height: 4px;
+    margin: 30px auto;
+    background: linear-gradient(90deg,var(--accent),#ffb347,var(--accent));
+    background-size: 200% auto;
+    animation: shimmer 3s linear infinite;
+}
 
-        .member-card:hover {
-            transform: translateY(-10px);
-        }
+@keyframes shimmer {
+    to { background-position: 200% center; }
+}
 
-        .member-card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
+.btn {
+    display: inline-block;
+    padding: 15px 35px;
+    background: var(--accent);
+    border-radius: 30px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    transition: 0.3s;
+    box-shadow: 0 0 20px rgba(247,141,21,0.4);
+}
 
-        .member-name {
-            font-size: 22px;
-            margin-bottom: 8px;
-            color: #F78D15;
-        }
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 35px rgba(247,141,21,0.9);
+}
 
-        .member-role {
-            font-size: 14px;
-            opacity: 0.7;
-            margin-bottom: 12px;
-        }
+/* SECTIONS */
 
-        .member-desc {
-            font-size: 15px;
-            line-height: 1.5;
-        }
+section {
+    padding: 120px 20px;
+    opacity: 0;
+    transform: translateY(60px);
+    transition: 1s ease;
+}
 
-    </style>
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 40px;
+}
+
+.section-divider {
+    width: 80px;
+    height: 4px;
+    background: var(--accent);
+    margin: 20px auto 60px auto;
+}
+
+/* GLASS PANEL */
+
+.glass {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(15px);
+    border-radius: 25px;
+    padding: 40px;
+    box-shadow: 0 0 40px rgba(247,141,21,0.15);
+}
+
+/* VIDEO */
+
+.video-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 50%;
+    height: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    max-height: 420px;
+}
+
+.video-container iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* SHOWS */
+
+.show-list {
+    max-width: 800px;
+    margin: auto;
+}
+
+.show-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    transition: 0.3s;
+}
+
+.show-item:hover {
+    background: rgba(247,141,21,0.08);
+}
+
+/* MEMBERS */
+
+.members-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.member-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.member-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.member-card:hover img {
+    transform: scale(1.1);
+}
+
+.member-info {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.8);
+    padding: 20px;
+    transform: translateY(100%);
+    transition: 0.5s;
+}
+
+.member-card:hover .member-info {
+    transform: translateY(0);
+}
+
+.member-name { color: var(--accent); font-size: 20px; }
+
+/* CONTACT */
+
+.contact-form {
+    max-width: 500px;
+    margin: auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255,255,255,0.08);
+    color: white;
+}
+
+.contact-form button {
+    width: 100%;
+    padding: 15px;
+    border-radius: 30px;
+    border: none;
+    background: var(--accent);
+    color: white;
+    font-weight: bold;
+}
+
+.about-text {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 2.5;
+    font-size: 17px;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 40px;
+    background: #0b0b0b;
+    opacity: 0.6;
+}
+
+</style>
 </head>
 
 <body>
 
-<div class="overlay">
-
-    <h1>Alderman Road</h1>
-
-    <div class="tagline">
-        Music, Music and Some More Music
+<div class="navbar">
+    <div class="nav-logo">Alderman Road</div>
+    <div class="nav-links">
+        <a href="#video">Live</a>
+        <a href="#shows">Shows</a>
+        <a href="#members">Band</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
     </div>
-
-    <div class="divider"></div>
-
-    <div class="hero-about">
-        Alderman Road is a band that you should enjoy seeing live at their next event. Not sure when that is but whatever
-    </div>
-
-    <a href="https://www.facebook.com/profile.php?id=61574431897959" class="social-btn" target="_blank">
-        Follow Us on Facebook
-    </a>
-
-    <footer>
-        © 2026 Alderman Road
-    </footer>
-
 </div>
 
-<!-- MEMBERS -->
-<section class="members-section">
-
-    <div class="members-title">Meet The Band</div>
-
-    <div class="members-container">
-
-        <div class="member-card">
-            <img src="Mike.jpg" alt="Mike">
-            <div class="member-name">Mike</div>
-            <div class="member-role">Pianist</div>
-            <div class="member-desc">Plays the piano and brings melody and energy to every show.</div>
-        </div>
-
-        <div class="member-card">
-            <img src="Freddie.jpg" alt="Freddie">
-            <div class="member-name">Freddie</div>
-            <div class="member-role">Lead Vocals</div>
-            <div class="member-desc">Powerful vocals and commanding stage presence.</div>
-        </div>
-
-        <div class="member-card">
-            <img src="Michael.jpg" alt="MJ">
-            <div class="member-name">MJ</div>
-            <div class="member-role">Performance</div>
-            <div class="member-desc">Brings movement, rhythm, and atmosphere to the stage.</div>
-        </div>
-
-        <div class="member-card">
-            <img src="Ed.jpg" alt="Ronald">
-            <div class="member-name">Ronald</div>
-            <div class="member-role">Guitar</div>
-            <div class="member-desc">Delivers powerful riffs and unforgettable solos.</div>
-        </div>
-
+<!-- HERO -->
+<div class="hero">
+    <div>
+        <h1><img src="LOGO.png" alt="Alderman Road"></h1>
+        <div class="tagline">Music. Music. and more Music.</div>
+        <div class="accent-line"></div>
+        <a href="https://www.facebook.com/profile.php?id=61574431897959" target="_blank" class="btn">Follow Us</a>
     </div>
+</div>
 
+<!-- VIDEO -->
+<section id="video">
+    <div class="section-title">Watch Us Live</div>
+    <div class="section-divider"></div>
+    <div class="glass video-wrapper">
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/SLBbMQ4Y-Nk?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1"
+            allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+
+<!-- SHOWS -->
+<section id="shows">
+    <div class="section-title">Upcoming Shows</div>
+    <div class="section-divider"></div>
+    <div class="glass show-list" id="showList"></div>
+</section>
+
+<!-- MEMBERS -->
+<section id="members">
+    <div class="section-title">Meet The Band</div>
+    <div class="section-divider"></div>
+    <div class="members-container">
+        <div class="member-card"><img src="Mike.jpg"><div class="member-info"><div class="member-name">Mike</div>Keys</div></div>
+        <div class="member-card"><img src="Freddie.jpg"><div class="member-info"><div class="member-name">Freddie</div>Lead Vocals</div></div>
+        <div class="member-card"><img src="Michael.jpg"><div class="member-info"><div class="member-name">MJ</div>Performance</div></div>
+        <div class="member-card"><img src="Ed.jpg"><div class="member-info"><div class="member-name">Ronald</div>Guitar</div></div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="section-title">Contact Us</div>
+    <div class="section-divider"></div>
+    <div class="glass">
+        <form class="contact-form" action="https://formspree.io/f/xbdqenva" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
 </section>
 
 <!-- ABOUT -->
-<section class="about-section">
-
-    <div class="about-title">About Us</div>
-
-    <div class="about-divider"></div>
+<section id="about">
+    <div class="section-title">About Us</div>
+    <div class="section-divider"></div>
 
     <div class="about-text">
-Alderman Road is proof that sometimes the best things begin with a chance conversation and a shared urge to make music—no pressure, no grand plan, just the simple enjoyment of playing together.
 
-Formed in 2025, the band came together when Rob (drums), Dave (bass) and Mike (keys) crossed paths at a local jam night at The White Hart. Between busy lives and full schedules, none were looking to commit to the demands of a traditional band—but all felt the same pull back to music. What started as a casual idea quickly turned into something more when they realised not only that they each played, but that they shared a similar outlook: make music for the love of it and see where it leads.
+<p>Alderman Road is proof that sometimes the best things begin with a chance conversation and a shared urge to make music—no pressure, no grand plan, just the simple enjoyment of playing together.</p>
 
-Early rehearsals took place in Mike’s kitchen and Dave’s conservatory, where the trio began rediscovering their musical roots. With Mike—an accomplished keyboard player and resident tech wizard—hitting record, it didn’t take long before a handful of songs began to take shape. What started as informal sessions soon revealed a natural chemistry, with each rehearsal effortlessly building into something that sounded, quite simply, right.
+<p>Formed in 2025, the band came together when Rob (drums), Dave (bass) and Mike (keys) crossed paths at a local jam night at The White Hart. Between busy lives and full schedules, none were looking to commit to the demands of a traditional band—but all felt the same pull back to music. What started as a casual idea quickly turned into something more when they realised not only that they each played, but that they shared a similar outlook: make music for the love of it and see where it leads.</p>
 
-The missing piece fell into place when Sophie joined. Introduced through friends, her background in Musical Theatre brought a confident stage presence and a clear, expressive vocal style to the mix. From the first rehearsal, her voice lifted the sound and completed the lineup—everything clicked instantly.
+<p>Early rehearsals took place in Mike’s kitchen and Dave’s conservatory, where the trio began rediscovering their musical roots. With Mike—an accomplished keyboard player and resident tech wizard—hitting record, it didn’t take long before a handful of songs began to take shape. What started as informal sessions soon revealed a natural chemistry, with each rehearsal effortlessly building into something that sounded, quite simply, right.</p>
 
-Together, Alderman Road have developed a distinctive approach. With keys at the heart of the music rather than guitars, familiar songs are reimagined with a fresh, vibrant feel. Blending strong vocals, tight rhythm and inventive arrangements, the band create performances that feel both recognisable and uniquely their own.
+<p>The missing piece fell into place when Sophie joined. Introduced through friends, her background in Musical Theatre brought a confident stage presence and a clear, expressive vocal style to the mix. From the first rehearsal, her voice lifted the sound and completed the lineup—everything clicked instantly.</p>
 
-What defines Alderman Road as much as their sound is their spirit. There’s no pressure, just a shared enjoyment of making music whenever they can, fitting it around everyday life while making every rehearsal count. Yet from those relaxed beginnings has come a growing set, packed with crowd-pleasing favourites which are sure to surprise and delight the audience.
+<p>Together, Alderman Road have developed a distinctive approach. With keys at the heart of the music rather than guitars, familiar songs are reimagined with a fresh, vibrant feel. Blending strong vocals, tight rhythm and inventive arrangements, the band create performances that feel both recognisable and uniquely their own.</p>
 
-With performances lined up at events including the Sausage & Beer Festival, Melton Beer Festival and the Sound Corner Festival, Alderman Road are ready to bring their sound to wider audiences.
+<p>What defines Alderman Road as much as their sound is their spirit. There’s no pressure, just a shared enjoyment of making music whenever they can, fitting it around everyday life while making every rehearsal count. Yet from those relaxed beginnings has come a growing set, packed with crowd-pleasing favourites which are sure to surprise and delight the audience.</p>
 
-If you’d like to find out more, or enquire about booking the band for your event, get in touch—Sophie, Dave, Rob and Mike look forward to seeing you in the crowd.
+<p>With performances lined up at events including the Sausage & Beer Festival, Melton Beer Festival and the Sound Corner Festival, Alderman Road are ready to bring their sound to wider audiences.</p>
+
+<p>If you’d like to find out more, or enquire about booking the band for your event, get in touch—Sophie, Dave, Rob and Mike look forward to seeing you in the crowd.</p>
+
     </div>
-
 </section>
+
+<footer>© 2026 Alderman Road</footer>
+
+<script>
+
+/* REVEAL ANIMATION */
+const sections = document.querySelectorAll("section");
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add("visible");
+        }
+    });
+}, { threshold: 0.2 });
+
+sections.forEach(section => observer.observe(section));
+
+/* UPCOMING SHOWS (EDIT ONLY THIS) */
+const shows = [
+    { name: "Sound Corner Festival", date: "May 22" },
+    { name: " ", date: " " },
+    { name: " ", date: " " }
+];
+
+const container = document.getElementById("showList");
+
+shows.forEach(show => {
+    const div = document.createElement("div");
+    div.className = "show-item";
+    div.innerHTML = `<span>${show.name}</span><span>${show.date}</span>`;
+    container.appendChild(div);
+});
+
+</script>
 
 </body>
 </html>
