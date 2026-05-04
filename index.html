@@ -185,13 +185,23 @@ body::before {
     animation: logoGlow 2.5s ease-in-out infinite alternate;
 }
 	
-/* Big, dramatic logo on phones + tablets */
-@media (hover: none) and (pointer: coarse) {
+@media (max-width: 900px) {
+
+    .hero {
+        padding-top: 40px;
+    }
+
+    .hero h1 {
+        margin: 0;
+    }
+
     .hero h1 img {
-        width: 85vw;       /* nearly full screen width */
-        max-width: 95%;
+        width: 96vw;
+        max-width: none;
+        max-height: 75svh;
         height: auto;
     }
+
 }
 
 @media (min-width: 1200px) {
