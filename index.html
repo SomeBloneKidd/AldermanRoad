@@ -171,6 +171,12 @@ body::before {
         background-attachment: fixed;
     }
 }
+@media (hover: none) and (pointer: coarse) {
+    .hero {
+        align-items: center;
+        padding-top: 60px;
+    }
+}	
 
 .hero h1 img {
     width: clamp(180px, 38vw, 580px);
@@ -178,10 +184,13 @@ body::before {
     height: auto;
     animation: logoGlow 2.5s ease-in-out infinite alternate;
 }
-/* Slightly larger logo on phones + tablets */
+	
+/* Big, dramatic logo on phones + tablets */
 @media (hover: none) and (pointer: coarse) {
     .hero h1 img {
-        width: clamp(240px, 60vw, 520px);
+        width: 85vw;       /* nearly full screen width */
+        max-width: 95%;
+        height: auto;
     }
 }
 
