@@ -318,6 +318,19 @@ section.visible {
     max-height: 420px;
 }
 
+@media (max-width: 900px) {
+
+    .video-container {
+        padding-bottom: 75%;   /* taller ratio */
+        max-height: none;      /* remove height cap */
+    }
+
+    .glass.video-wrapper {
+        padding: 20px;         /* slightly tighter frame */
+    }
+
+}	
+
 .video-container iframe {
     position: absolute;
     width: 100%;
